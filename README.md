@@ -8,6 +8,7 @@ MVP de acompanhamento de carteiras por cliente, em português, como PWA (aplicat
 - Posições com ticker, quantidade e custo médio; edição substitui a posição total atual.
 - Exclusão de uma posição específica, com confirmação antes de remover.
 - Cálculo de custo investido, valor estimado de mercado e retorno simples sobre custo médio.
+- Gráfico de evolução do valor de mercado e do custo investido por carteira, com pontos diários registrados no dispositivo.
 - Atualização automática diária pelo arquivo COTAHIST da B3; um job baixa e processa o ZIP fora do aparelho e mantém um feed compacto de fechamentos.
 - Persistência local no navegador e exportação de cópia JSON.
 - Layout responsivo e manifest/service worker para instalação e acesso ao app offline (sem cotações offline).
@@ -25,6 +26,8 @@ PWA responsiva com HTML/CSS/JavaScript sem dependências externas de runtime. O 
 Os dados de clientes e posições permanecem no navegador deste dispositivo; não são enviados ao workflow nem publicados. O feed público contém apenas preços de mercado do COTAHIST. Não há autenticação, criptografia própria, sincronização de carteiras ou controle de acesso entre usuários. O bloqueio de tela do aparelho e a segurança do navegador são essenciais. Para atender uso profissional com múltiplos usuários/dispositivos, a próxima etapa é backend Supabase (Auth + PostgreSQL) com `user_id` e políticas Row Level Security em clientes, carteiras e posições. Backup e trilha de auditoria também devem entrar antes do uso com dados reais de clientes.
 
 Rentabilidade é uma aproximação: não inclui impostos, corretagem, proventos, eventos corporativos ou fluxos de caixa e não equivale ao retorno ponderado pelo tempo. O COTAHIST contém fechamentos por pregão, não cotações intradiárias; o feed é atualizado uma vez por dia útil após a publicação do arquivo pela B3. Em fins de semana e feriados, mantém-se o último pregão disponível. O layout tem registros fixos de 245 bytes. A B3 esclarece que dados históricos e de fim de dia D-1 têm regime diferente de market data intraday; verifique os termos aplicáveis ao uso e à redistribuição. Cotações não são recomendação de investimento.
+
+O gráfico de evolução começa a partir dos fechamentos consultados depois desta versão. Ele não reconstrói períodos anteriores e não guarda pontos dos pregões em que o aplicativo não foi aberto para consultar o feed. O histórico do gráfico também permanece no armazenamento local do navegador.
 
 ## Ativar a automação e publicar o app
 

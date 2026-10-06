@@ -8,9 +8,12 @@ MVP de acompanhamento de carteiras por cliente, em português, como PWA (aplicat
 - Posições com ticker, quantidade e custo médio; edição substitui a posição total atual.
 - Exclusão de uma posição específica, com confirmação antes de remover.
 - Cálculo de custo investido, valor estimado de mercado e retorno simples sobre custo médio.
+- Classificação manual dos ativos por classe, com painel de distribuição pelo valor de mercado.
+- Busca por ticker/cliente, filtro por classe e indicação da data de cada cotação; preços de pregões anteriores ficam identificados.
 - Gráfico de evolução do valor de mercado e do custo investido por carteira, com pontos diários registrados no dispositivo.
+- Resumo de carteira pronto para impressão ou salvamento em PDF pelo navegador.
 - Atualização automática diária pelo arquivo COTAHIST da B3; um job baixa e processa o ZIP fora do aparelho e mantém um feed compacto de fechamentos.
-- Persistência local no navegador e exportação de cópia JSON.
+- Persistência local no navegador e exportação/restauração de cópia JSON validada.
 - Layout responsivo e manifest/service worker para instalação e acesso ao app offline (sem cotações offline).
 
 ## Rodar
@@ -19,7 +22,7 @@ Abra esta pasta em um servidor estático local ou publique por HTTPS. Em celular
 
 ## Arquitetura escolhida
 
-PWA responsiva com HTML/CSS/JavaScript sem dependências externas de runtime. O armazenamento de clientes e posições usa `localStorage`. Um workflow do GitHub Actions roda em horário agendado após o pregão, baixa o COTAHIST diário para o runner, descompacta e percorre o TXT linha por linha com memória limitada, e publica só um mapa JSON compacto de ticker, fechamento e data. A PWA busca o feed ao abrir, quando volta ao primeiro plano e a cada seis horas enquanto fica aberta. O aparelho nunca baixa o ZIP bruto nem os arquivos anuais.
+PWA responsiva com HTML/CSS/JavaScript e fontes do sistema, sem bibliotecas de runtime ou serviços pagos. O armazenamento de clientes e posições usa `localStorage`. Um workflow do GitHub Actions roda em horário agendado após o pregão, baixa o COTAHIST diário para o runner, descompacta e percorre o TXT linha por linha com memória limitada, e publica só um mapa JSON compacto de ticker, fechamento e data. A PWA busca o feed ao abrir, quando volta ao primeiro plano e a cada seis horas enquanto fica aberta. O aparelho nunca baixa o ZIP bruto nem os arquivos anuais.
 
 ## Dados, segurança e limites
 
@@ -27,7 +30,7 @@ Os dados de clientes e posições permanecem no navegador deste dispositivo; nã
 
 Rentabilidade é uma aproximação: não inclui impostos, corretagem, proventos, eventos corporativos ou fluxos de caixa e não equivale ao retorno ponderado pelo tempo. O COTAHIST contém fechamentos por pregão, não cotações intradiárias; o feed é atualizado uma vez por dia útil após a publicação do arquivo pela B3. Em fins de semana e feriados, mantém-se o último pregão disponível. O layout tem registros fixos de 245 bytes. A B3 esclarece que dados históricos e de fim de dia D-1 têm regime diferente de market data intraday; verifique os termos aplicáveis ao uso e à redistribuição. Cotações não são recomendação de investimento.
 
-O gráfico de evolução começa a partir dos fechamentos consultados depois desta versão. Ele não reconstrói períodos anteriores e não guarda pontos dos pregões em que o aplicativo não foi aberto para consultar o feed. O histórico do gráfico também permanece no armazenamento local do navegador.
+O gráfico de evolução começa a partir dos fechamentos consultados depois desta versão. Ele não reconstrói períodos anteriores e não guarda pontos dos pregões em que o aplicativo não foi aberto para consultar o feed. O histórico do gráfico também permanece no armazenamento local do navegador. A distribuição por classe usa a classificação manual informada para cada posição e valores baseados no último preço disponível. O relatório para impressão é informativo e não inclui proventos, taxas ou impostos. A restauração de backup substitui as carteiras atuais após confirmação; mantenha uma cópia antes de restaurar.
 
 ## Ativar a automação e publicar o app
 

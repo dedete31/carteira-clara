@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f7f4">
+  <meta name="description" content="Acompanhe as carteiras de investimento dos seus clientes.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <title>Carteira Clara</title>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <a class="brand" href="#"><span class="brand-mark">C</span><span>carteira<span class="brand-light">clara</span><small>GESTÃO DE CARTEIRAS</small></span></a>
+      <div class="nav-label">VISÃO GERAL</div>
+      <button class="nav-item active" data-page="portfolio"><span>▦</span> Carteira</button>
+      <button class="nav-item" data-page="clients"><span>♙</span> Clientes</button>
+      <div class="sidebar-bottom"><div class="local-indicator"><i></i> Dados salvos neste dispositivo</div><button class="quiet" id="privacy-btn">Privacidade e dados</button></div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div class="mobile-brand"><span class="brand-mark">C</span> Carteira Clara</div><div class="crumb">Carteiras <span>/</span> <b id="crumb-client">Visão geral</b></div><div class="top-actions"><span class="today" id="today"></span><button class="icon-btn" id="refresh-btn" title="Buscar fechamentos mais recentes">↻</button><button class="avatar" title="Perfil local">LC</button></div></header>
+      <section id="portfolio-page" class="page">
+        <div class="page-heading"><div><p class="eyebrow">ACOMPANHAMENTO</p><h1>Suas carteiras</h1><p class="subheading">Visão consolidada dos investimentos dos seus clientes.</p></div><button class="primary" id="new-client">＋ Novo cliente</button></div>
+        <div class="client-strip" id="client-strip"></div>
+        <div class="quote-source"><div class="note quote-note">Fonte: COTAHIST diário da B3. A automação busca o fechamento após cada pregão em dia útil; o celular baixa apenas a tabela compacta de preços.<span id="quote-status" class="quote-status">Verificando atualização…</span></div><button class="primary" id="refresh-btn-page">↻ Atualizar agora</button></div>
+        <div id="portfolio-content"></div>
+      </section>
+      <section id="clients-page" class="page hidden">
+        <div class="page-heading"><div><p class="eyebrow">RELACIONAMENTO</p><h1>Clientes</h1><p class="subheading">Cada cliente tem sua própria carteira.</p></div><button class="primary" id="new-client-2">＋ Novo cliente</button></div>
+        <div id="clients-content"></div>
+      </section>
+      <footer class="disclaimer">Cotações para acompanhamento informativo. Rentabilidade calculada sobre custo médio informado; não inclui taxas, impostos ou proventos.</footer>
+    </main>
+  </div>
+  <nav class="mobile-nav"><button class="active" data-page="portfolio">▦<small>Carteira</small></button><button data-page="clients">♙<small>Clientes</small></button><button id="mobile-add">＋<small>Adicionar</small></button></nav>
+  <dialog id="client-dialog"><form method="dialog" id="client-form"><button class="close" value="cancel">×</button><p class="eyebrow">NOVA CARTEIRA</p><h2>Adicionar cliente</h2><label>Nome do cliente<input name="name" required maxlength="60" placeholder="Ex.: Marina Costa" autofocus></label><label>Identificação (opcional)<input name="ref" maxlength="30" placeholder="Ex.: código interno"></label><div class="form-actions"><button class="secondary" value="cancel">Cancelar</button><button class="primary" value="save">Criar carteira</button></div></form></dialog>
+  <dialog id="asset-dialog"><form id="asset-form" novalidate><button class="close" type="button" data-close-asset aria-label="Fechar">×</button><p class="eyebrow">POSIÇÃO DE INVESTIMENTO</p><h2 id="asset-title">Adicionar ativo</h2><p class="modal-note">Informe a posição total atual e seu custo médio por unidade.</p><label>Ticker ou código<input name="symbol" required maxlength="15" placeholder="Ex.: PETR4" autocapitalize="characters"></label><label>Quantidade<input name="quantity" required type="number" min="0.000001" step="any" placeholder="100"></label><label>Custo médio por unidade<input name="cost" required type="number" min="0.000001" step="any" placeholder="35,00"></label><div class="form-actions"><button class="secondary" type="button" data-close-asset>Cancelar</button><button class="primary" type="submit">Salvar posição</button></div></form></dialog>
+  <dialog id="privacy-dialog"><form method="dialog"><button class="close" value="cancel">×</button><p class="eyebrow">SEUS DADOS</p><h2>Privacidade e armazenamento</h2><p>As informações ficam no armazenamento deste navegador e deste dispositivo. Elas não são enviadas a um servidor pelo aplicativo. Qualquer pessoa com acesso ao aparelho e ao navegador pode acessá-las.</p><p>Use um dispositivo protegido e faça exportações de backup. Limpar os dados do navegador pode apagar as carteiras. Esta versão não possui login, sincronização nem criptografia própria.</p><p>O app baixa apenas um arquivo compacto de preços diários, sem enviar nomes, quantidades ou tickers dos clientes.</p><div class="form-actions"><button class="secondary" id="export-btn" value="cancel">Exportar backup</button><button class="primary" value="ok">Entendi</button></div></form></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>

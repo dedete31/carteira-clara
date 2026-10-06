@@ -1,0 +1,8 @@
+# Materiais sincronizados do projeto e instruções locais não devem ser publicados.
+/sources/
+/AGENTS.md
+
+# Dados locais e configurações de ferramentas.
+/.codex/
+/.agents/
+/.aws/

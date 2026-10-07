@@ -1,4 +1,4 @@
-const CACHE='carteira-clara-shell-v8';
-self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./','./index.html','./styles.css?v=client-management-20261006c','./app.js?v=client-management-20261006c','./manifest.webmanifest']))));
+const CACHE='carteira-clara-shell-v9';
+self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./','./index.html','./styles.css?v=client-management-20261006d','./app.js?v=client-management-20261006d','./manifest.webmanifest']))));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('carteira-clara-shell-')&&k!==CACHE).map(k=>caches.delete(k))))));
 self.addEventListener('fetch',e=>{const url=new URL(e.request.url);if(url.origin!==location.origin)return;if(url.pathname.endsWith('/data/quotes.json')){e.respondWith(fetch(e.request,{cache:'no-store'}).then(r=>{if(r.ok)caches.open(CACHE).then(c=>c.put(e.request,r.clone()));return r}).catch(()=>caches.match(e.request)));return}e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)))})

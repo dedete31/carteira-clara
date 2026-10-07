@@ -37,7 +37,7 @@ jobs:
       - name: Preparar o site e o feed compacto
         run: |
           mkdir -p dist/data
-          cp index.html app.js styles.css manifest.webmanifest sw.js dist/
+          cp index.html app.js opportunities.js styles.css manifest.webmanifest sw.js dist/
           cp data/quotes.json dist/data/quotes.json
 
       - name: Preparar publicação no GitHub Pages

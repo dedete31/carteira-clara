@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#f5f7f4">
   <meta name="description" content="Acompanhe as carteiras de investimento dos seus clientes.">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="styles.css?v=advisor-tools-20261006b">
+  <link rel="stylesheet" href="styles.css?v=client-management-20261006c">
   <title>Carteira Clara</title>
 </head>
 <body>
@@ -34,10 +34,10 @@
     </main>
   </div>
   <nav class="mobile-nav"><button class="active" data-page="portfolio">▦<small>Carteira</small></button><button data-page="clients">♙<small>Clientes</small></button><button id="mobile-add">＋<small>Adicionar</small></button></nav>
-  <dialog id="client-dialog"><form method="dialog" id="client-form"><button class="close" value="cancel">×</button><p class="eyebrow">NOVA CARTEIRA</p><h2>Adicionar cliente</h2><label>Nome do cliente<input name="name" required maxlength="60" placeholder="Ex.: Marina Costa" autofocus></label><label>Identificação (opcional)<input name="ref" maxlength="30" placeholder="Ex.: código interno"></label><div class="form-actions"><button class="secondary" value="cancel">Cancelar</button><button class="primary" value="save">Criar carteira</button></div></form></dialog>
+  <dialog id="client-dialog"><form method="dialog" id="client-form" novalidate><button class="close" value="cancel">×</button><p class="eyebrow">NOVA CARTEIRA</p><h2>Adicionar cliente</h2><label>Nome do cliente<input name="name" required maxlength="60" placeholder="Ex.: Marina Costa" autofocus></label><label>Identificação (opcional)<input name="ref" maxlength="30" placeholder="Ex.: código interno"></label><div class="form-actions"><button class="secondary" value="cancel">Cancelar</button><button class="primary" value="save">Criar carteira</button></div></form></dialog>
   <dialog id="asset-dialog"><form id="asset-form" novalidate><button class="close" type="button" data-close-asset aria-label="Fechar">×</button><p class="eyebrow">POSIÇÃO DE INVESTIMENTO</p><h2 id="asset-title">Adicionar ativo</h2><p class="modal-note">Informe a posição total atual e seu custo médio por unidade.</p><label>Ticker ou código<input name="symbol" required maxlength="15" placeholder="Ex.: PETR4" autocapitalize="characters"></label><label>Classe do ativo<select name="category"><option>Ações e BDRs</option><option>Fundos imobiliários</option><option>ETFs</option><option>Renda fixa</option><option>Fundos</option><option>Outros</option><option>Não classificado</option></select></label><label>Quantidade<input name="quantity" required type="number" min="0.000001" step="any" placeholder="100"></label><label>Custo médio por unidade<input name="cost" required type="number" min="0.000001" step="any" placeholder="35,00"></label><div class="form-actions"><button class="secondary" type="button" data-close-asset>Cancelar</button><button class="primary" type="submit">Salvar posição</button></div></form></dialog>
   <dialog id="privacy-dialog"><form method="dialog"><button class="close" value="cancel">×</button><p class="eyebrow">SEUS DADOS</p><h2>Privacidade e armazenamento</h2><p>As informações ficam no armazenamento deste navegador e deste dispositivo. Elas não são enviadas a um servidor pelo aplicativo. Qualquer pessoa com acesso ao aparelho e ao navegador pode acessá-las.</p><p>Use um dispositivo protegido e faça exportações de backup. Limpar os dados do navegador pode apagar as carteiras. Esta versão não possui login, sincronização nem criptografia própria.</p><p>O app baixa apenas um arquivo compacto de preços diários, sem enviar nomes, quantidades ou tickers dos clientes.</p><div class="backup-actions"><button class="secondary" id="export-btn" value="cancel">Exportar backup JSON</button><label class="backup-import">Restaurar backup JSON<input id="import-backup" type="file" accept="application/json,.json"></label></div><div class="form-actions"><button class="primary" value="ok">Entendi</button></div></form></dialog>
   <div id="toast" role="status" aria-live="polite"></div>
-  <script src="app.js?v=advisor-tools-20261006b" defer></script>
+  <script src="app.js?v=client-management-20261006c" defer></script>
 </body>
 </html>
